@@ -1,32 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import BaseSketch from 'react-p5'
-import { ZDK } from '@zoralabs/zdk'
 
-const API_ENDPOINT = 'https://api.zora.co/graphql'
-const zdk = new ZDK({ endpoint: API_ENDPOINT }) // Defaults to Ethereum Mainnet
-
-const args = {
-	token: {
-		address: '0xCa21d4228cDCc68D4e23807E5e370C07577Dd152',
-		tokenId: '314',
-	},
-	includeFullDetails: false, // Optional, provides more data on the NFT such as all historical events
-}
 const windowWidth = 500
 const windowHeight = 500
+const NUMBER_OF_COLUMNS = 20
+const NUMBER_OF_ROWS = 25
 const Sketch = ({ zorbs }) => {
 	const [t, setT] = useState(0)
 	const [zorb, setZorb] = useState()
-
-	useEffect(() => {
-		console.log('PROPS: zorbs', zorbs)
-
-		const fetchData = async () => {
-			const response = await zdk.token(args)
-			console.log(response)
-		}
-		fetchData()
-	}, [])
+	const [zorbArray, setZorbArray] = useState([])
 
 	const setup = (p5, canvasParentRef) => {
 		// use parent to render the canvas in this ref
@@ -44,25 +26,30 @@ const Sketch = ({ zorbs }) => {
 		const mvx = 20
 		const mvy = 20
 		p5.background(0, w)
-		for (let x = 0; x < windowWidth; x += 25)
-			for (let y = 0; y < windowHeight; y += 20) {
+		for (let x = 0; x < NUMBER_OF_COLUMNS; x += 1)
+			for (let y = 0; y < NUMBER_OF_ROWS; y += 1) {
 				const n = _ => {
-					return p5.TAU * (t + p5.sin(p5.TAU * t - p5.dist(x, y, w / 2, h / 2) * fluid))
+					return p5.TAU * (t + p5.sin(p5.TAU * t - p5.dist(25 * x, 20 * y, w / 2, h / 2) * fluid))
 				}
-				const ox = x + mvx * p5.sin(n())
-				const oy = y + mvy * p5.cos(n())
+				const ox = 25 * x + mvx * p5.sin(n())
+				const oy = 20 * y + mvy * p5.cos(n())
 
 				let nz = 100
-				nz = p5.noise(x * fluid, y * fluid)
+				nz = p5.noise(25 * x * fluid, 20 * y * fluid)
 				if (zorb) {
-					p5.image(zorb, ox, oy, r, r)
+					p5.image(zorbArray[(x + 1) * y], ox, oy, r, r)
 				}
 			}
 	}
 
 	const preload = p5 => {
+		const myImages = []
+		for (let i = 0; i < NUMBER_OF_COLUMNS * NUMBER_OF_ROWS; i++) {
+			myImages.push(p5.loadImage(zorbs[i]))
+		}
 		const testZorb = p5.loadImage(zorbs[0])
 		setZorb(testZorb)
+		setZorbArray(myImages)
 	}
 	return <BaseSketch setup={setup} draw={draw} preload={preload} />
 }

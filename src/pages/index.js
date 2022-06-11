@@ -19,7 +19,7 @@ const args = {
 	where: {
 		collectionAddresses: ['0xCa21d4228cDCc68D4e23807E5e370C07577Dd152'],
 	},
-	pagination: { limit: 50 }, // Optional, limits the response size to 3 NFTs
+	pagination: { limit: 500 }, // Optional, limits the response size to 3 NFTs
 	includeFullDetails: false, // Optional, provides more data on the NFTs such as events
 	includeSalesHistory: false, // Optional, provides sales data on the NFTs
 }
@@ -57,9 +57,10 @@ const Home = ({ zorbs }) => (
 
 export async function getServerSideProps(context) {
 	const response = await zdk.tokens(args)
-	const zorb = Math.floor(Math.random() * (50 + 1))
+	let zorbs = response.tokens.nodes.map(zorb => zorb.token.image.url)
+
 	return {
-		props: { hello: 'world', zorbs: [response.tokens.nodes[zorb].token.image.url] }, // will be passed to the page component as props
+		props: { zorbs }, // will be passed to the page component as props
 	}
 }
 
