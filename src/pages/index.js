@@ -46,7 +46,7 @@ const Home = ({ zorbs }) => (
 	</div>
 )
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
 	const response = await zdk.tokens(args)
 	let zorbs = response.tokens.nodes.map(zorb => zorb.token.image.url)
 
