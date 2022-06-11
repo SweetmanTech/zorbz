@@ -3,6 +3,10 @@
 - Live Demo: https://zorbvizualizer.vercel.app/
 > Zora API Hackathon submission.
 
+### Demo
+![zorb-visualizer](https://user-images.githubusercontent.com/23249402/173201270-f417c092-74d4-4776-81d9-bb9469cd62f6.gif)
+
+
 ## Team
 
 -   Team Lead: [valcoholics.eth](https://twitter.com/DoreenHuntingt3)
