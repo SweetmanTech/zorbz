@@ -1,27 +1,18 @@
-import { FC } from 'react'
 import { APP_NAME } from '@/lib/consts'
 import { ShareIcon } from '@heroicons/react/outline'
 import dynamic from 'next/dynamic'
 import { ZDK } from '@zoralabs/zdk'
 
 const API_ENDPOINT = 'https://api.zora.co/graphql'
-const zdk = new ZDK({ endpoint: API_ENDPOINT }) // Defaults to Ethereum Mainnet
-
-// const args = {
-// 	token: {
-// 		address: '0xCa21d4228cDCc68D4e23807E5e370C07577Dd152',
-// 		tokenId: '314',
-// 	},
-// 	includeFullDetails: false, // Optional, provides more data on the NFT such as all historical events
-// }
+const zdk = new ZDK({ endpoint: API_ENDPOINT })
 
 const args = {
 	where: {
 		collectionAddresses: ['0xCa21d4228cDCc68D4e23807E5e370C07577Dd152'],
 	},
-	pagination: { limit: 500 }, // Optional, limits the response size to 3 NFTs
-	includeFullDetails: false, // Optional, provides more data on the NFTs such as events
-	includeSalesHistory: false, // Optional, provides sales data on the NFTs
+	pagination: { limit: 500 },
+	includeFullDetails: false,
+	includeSalesHistory: false,
 }
 
 const DynamicComponentWithNoSSR = dynamic(() => import('../components/Sketch'), { ssr: false })
