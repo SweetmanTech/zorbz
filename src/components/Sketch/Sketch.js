@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import BaseSketch from 'react-p5'
 
 const windowWidth = 500
