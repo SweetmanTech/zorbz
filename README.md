@@ -9,7 +9,7 @@
 
 ## Team
 
--   Team Lead: [valcoholics.eth](https://twitter.com/DoreenHuntingt3)
+-   Team Lead/Generative Artist: [valcoholics.eth](https://twitter.com/DoreenHuntingt3)
 -   Engineer: [sweetman.eth](https://github.com/SweetmanTech)
 -   Designer: [novumrembey⭐✌🏿.eth](https://github.com/rayadamas/)
 
