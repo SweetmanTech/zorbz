@@ -1,6 +1,6 @@
 # Zorb Visualizer
 
-- Live Demo: https://zorbvizualizer.vercel.app/
+- Live Demo: https://zorbz.vercel.app/
 > Zora API Hackathon submission.
 
 ### Demo
@@ -9,7 +9,8 @@
 
 ## Team
 
--   Team Lead/Generative Artist: [valcoholics.eth](https://twitter.com/DoreenHuntingt3)
+-   Team Lead/Generative Artist: [valcoholics.eth](https://twitter.com/valcoholics1)
+-   Engineer: [wayneh.eth](https://twitter.com/@waynehoover_)
 -   Engineer: [sweetman.eth](https://github.com/SweetmanTech)
 -   Designer: [novumrembey⭐✌🏿.eth](https://github.com/rayadamas/)
 
