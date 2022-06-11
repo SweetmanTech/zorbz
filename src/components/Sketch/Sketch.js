@@ -3,9 +3,12 @@ import BaseSketch from 'react-p5'
 
 const windowWidth = 500
 const windowHeight = 500
-const Sketch = props => {
+const NUMBER_OF_COLUMNS = 20
+const NUMBER_OF_ROWS = 25
+const Sketch = ({ zorbs }) => {
 	const [t, setT] = useState(0)
 	const [zorb, setZorb] = useState()
+	const [zorbArray, setZorbArray] = useState([])
 
 	const setup = (p5, canvasParentRef) => {
 		// use parent to render the canvas in this ref
@@ -23,27 +26,30 @@ const Sketch = props => {
 		const mvx = 20
 		const mvy = 20
 		p5.background(0, w)
-		for (let x = 0; x < windowWidth; x += 25)
-			for (let y = 0; y < windowHeight; y += 20) {
+		for (let x = 0; x < NUMBER_OF_COLUMNS; x += 1)
+			for (let y = 0; y < NUMBER_OF_ROWS; y += 1) {
 				const n = _ => {
-					return p5.TAU * (t + p5.sin(p5.TAU * t - p5.dist(x, y, w / 2, h / 2) * fluid))
+					return p5.TAU * (t + p5.sin(p5.TAU * t - p5.dist(25 * x, 20 * y, w / 2, h / 2) * fluid))
 				}
-				const ox = x + mvx * p5.sin(n())
-				const oy = y + mvy * p5.cos(n())
+				const ox = 25 * x + mvx * p5.sin(n())
+				const oy = 20 * y + mvy * p5.cos(n())
 
 				let nz = 100
-				nz = p5.noise(x * fluid, y * fluid)
+				nz = p5.noise(25 * x * fluid, 20 * y * fluid)
 				if (zorb) {
-					p5.image(zorb, ox, oy, r, r)
+					p5.image(zorbArray[(x + 1) * (y + 1) - 1], ox, oy, r, r)
 				}
 			}
 	}
 
 	const preload = p5 => {
-		const testZorb = p5.loadImage(
-			'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMTAgMTEwIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9Imd6ciIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSg2Ni40NTc4IDI0LjM1NzUpIHNjYWxlKDc1LjI5MDgpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgcj0iMSIgY3g9IjAiIGN5PSIwJSI+PHN0b3Agb2Zmc2V0PSIxNS42MiUiIHN0b3AtY29sb3I9ImhzbCgzMjYsIDczJSwgOTQlKSIgLz48c3RvcCBvZmZzZXQ9IjM5LjU4JSIgc3RvcC1jb2xvcj0iaHNsKDMyNSwgNzklLCA4NyUpIiAvPjxzdG9wIG9mZnNldD0iNzIuOTIlIiBzdG9wLWNvbG9yPSJoc2woMzE5LCA4OCUsIDc0JSkiIC8+PHN0b3Agb2Zmc2V0PSI5MC42MyUiIHN0b3AtY29sb3I9ImhzbCgzMTcsIDkyJSwgNjQlKSIgLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9ImhzbCgzMTYsIDkyJSwgNjMlKSIgLz48L3JhZGlhbEdyYWRpZW50PjwvZGVmcz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1LDUpIj48cGF0aCBkPSJNMTAwIDUwQzEwMCAyMi4zODU4IDc3LjYxNDIgMCA1MCAwQzIyLjM4NTggMCAwIDIyLjM4NTggMCA1MEMwIDc3LjYxNDIgMjIuMzg1OCAxMDAgNTAgMTAwQzc3LjYxNDIgMTAwIDEwMCA3Ny42MTQyIDEwMCA1MFoiIGZpbGw9InVybCgjZ3pyKSIgLz48cGF0aCBzdHJva2U9InJnYmEoMCwwLDAsMC4wNzUpIiBmaWxsPSJ0cmFuc3BhcmVudCIgc3Ryb2tlLXdpZHRoPSIxIiBkPSJNNTAsMC41YzI3LjMsMCw0OS41LDIyLjIsNDkuNSw0OS41Uzc3LjMsOTkuNSw1MCw5OS41UzAuNSw3Ny4zLDAuNSw1MFMyMi43LDAuNSw1MCwwLjV6IiAvPjwvZz48L3N2Zz4='
-		)
+		const myImages = []
+		for (let i = 0; i < NUMBER_OF_COLUMNS * NUMBER_OF_ROWS; i++) {
+			myImages.push(p5.loadImage(zorbs[i]))
+		}
+		const testZorb = p5.loadImage(zorbs[0])
 		setZorb(testZorb)
+		setZorbArray(myImages)
 	}
 	return <BaseSketch setup={setup} draw={draw} preload={preload} />
 }
