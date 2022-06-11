@@ -2,8 +2,6 @@
 
 > Zora API Hackathon submission.
 
-This starter kit is composed of Next.js and Tailwind CSS, with RainbowKit, ethers, & wagmi for all your web3 needs. It uses Typescript and an opinionated directory structure for maximum dev confy-ness.
-
 ## Team
 
 -   Team Lead: [valcoholics.eth](https://twitter.com/DoreenHuntingt3)
