@@ -37,7 +37,7 @@ const Sketch = ({ zorbs }) => {
 				let nz = 100
 				nz = p5.noise(25 * x * fluid, 20 * y * fluid)
 				if (zorb) {
-					p5.image(zorbArray[(x + 1) * y], ox, oy, r, r)
+					p5.image(zorbArray[(x + 1) * (y + 1) - 1], ox, oy, r, r)
 				}
 			}
 	}
