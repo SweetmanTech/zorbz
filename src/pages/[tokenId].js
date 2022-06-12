@@ -16,11 +16,8 @@ const zorbArgs = {
 }
 
 const eventsArgs = tokenId => {
-	console.log('tokenId (use date-fns to get start / end day singe Jan 1, 2021)', tokenId)
 	const startDate = format(addDays(new Date(2022, 0, 0), tokenId), 'yyyy-MM-dd')
 	const endDate = format(addDays(new Date(2022, 0, 1), tokenId), 'yyyy-MM-dd')
-	console.log('START DATE', startDate)
-	console.log('END DATE', endDate)
 
 	return {
 		where: {},
@@ -34,14 +31,14 @@ const eventsArgs = tokenId => {
 
 const DynamicComponentWithNoSSR = dynamic(() => import('../components/Sketch'), { ssr: false })
 
-const Home = ({ zorbs, zora }) => (
+const Home = ({ zorbs, zoraEvents }) => (
 	<div className="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
 		<div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
 			<div className="flex justify-center pt-8 sm:justify-start sm:pt-0">
 				<h1 className="text-6xl font-bold dark:text-white">{APP_NAME}</h1>
 			</div>
 			<div>
-				<DynamicComponentWithNoSSR zorbs={zorbs} zora={zora} />
+				<DynamicComponentWithNoSSR zorbs={zorbs} zoraEvents={zoraEvents} />
 			</div>
 
 			<div className="flex justify-center mt-4 sm:items-center sm:justify-between">
@@ -64,16 +61,13 @@ const Home = ({ zorbs, zora }) => (
 )
 
 export async function getStaticProps({ params }) {
-	console.log('PARAMS: params.tokenId', params.tokenId)
-
 	const zorbResponse = await zdk.tokens(zorbArgs)
 	const dailyEventArgs = eventsArgs(params.tokenId)
-	const zoraResponse = await zdk.events(dailyEventArgs)
-	console.log('ZORA RESPONSE', zoraResponse)
+	const eventsResponse = await zdk.events(dailyEventArgs)
 	const zorbs = zorbResponse.tokens.nodes.map(zorb => zorb.token.image.url)
-	const zora = zoraResponse.events.nodes
+	const zoraEvents = eventsResponse.events.nodes
 	return {
-		props: { zorbs, zora }, // will be passed to the page component as props
+		props: { zorbs, zoraEvents }, // will be passed to the page component as props
 	}
 }
 

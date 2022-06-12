@@ -5,7 +5,7 @@ const windowWidth = 500
 const windowHeight = 500
 const NUMBER_OF_COLUMNS = 20
 const NUMBER_OF_ROWS = 25
-const Sketch = ({ zorbs, zora }) => {
+const Sketch = ({ zorbs, zoraEvents }) => {
 	const [t, setT] = useState(0)
 	const [zorbArray, setZorbArray] = useState([])
 
@@ -35,7 +35,7 @@ const Sketch = ({ zorbs, zora }) => {
 
 				let nz = 100
 				nz = p5.noise(25 * x * fluid, 20 * y * fluid)
-				if ((x + 1) * (y + 1) - 1 < zora.length) {
+				if ((x + 1) * (y + 1) - 1 < zoraEvents.length) {
 					p5.image(zorbArray[(x + 1) * (y + 1) - 1], ox, oy, r, r)
 				}
 			}
