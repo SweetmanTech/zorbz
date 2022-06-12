@@ -57,7 +57,6 @@ const Home = ({ zorbs, zora }) => (
 export async function getStaticProps(context) {
 	const zorbResponse = await zdk.tokens(zorbArgs)
 	const zoraResponse = await zdk.events(eventsArgs)
-	console.log('ZORA RESPONSE', zoraResponse)
 	const zorbs = zorbResponse.tokens.nodes.map(zorb => zorb.token.image.url)
 	const zora = zoraResponse.events.nodes
 	return {
