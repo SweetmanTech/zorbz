@@ -1,35 +1,7 @@
 import { APP_NAME } from '@/lib/consts'
 import { ShareIcon } from '@heroicons/react/outline'
 import dynamic from 'next/dynamic'
-import { ZDK } from '@zoralabs/zdk'
-import { addDays, format } from 'date-fns'
-
-const API_ENDPOINT = 'https://api.zora.co/graphql'
-const zdk = new ZDK({ endpoint: API_ENDPOINT })
-
-const zorbArgs = {
-	where: {
-		collectionAddresses: ['0xCa21d4228cDCc68D4e23807E5e370C07577Dd152'],
-	},
-	pagination: { limit: 500 },
-	includeFullDetails: false,
-}
-
-const getFormattedDate = daysSinceGenesis => format(addDays(new Date(2022, 0, 0), daysSinceGenesis), 'yyyy-MM-dd')
-
-const eventsArgs = tokenId => {
-	const startDate = getFormattedDate(tokenId)
-	const endDate = getFormattedDate(tokenId + 1)
-
-	return {
-		where: {},
-		filter: { timeFilter: { endDate, startDate }, eventTypes: 'V2_AUCTION_EVENT' },
-		pagination: { limit: 500 },
-		includeFullDetails: false,
-		includeSalesHistory: false,
-		sort: { sortKey: 'CREATED', sortDirection: 'DESC' },
-	}
-}
+import { getEvents, getZorbs } from '../utils/zoraApi'
 
 const DynamicComponentWithNoSSR = dynamic(() => import('../components/Sketch'), { ssr: false })
 
@@ -63,21 +35,14 @@ const Home = ({ zorbs, zoraEvents }) => (
 )
 
 export async function getStaticProps({ params }) {
-	const zorbResponse = await zdk.tokens(zorbArgs)
-	const dailyEventArgs = eventsArgs(params.tokenId)
-	const eventsResponse = await zdk.events(dailyEventArgs)
-	const zorbs = zorbResponse.tokens.nodes.map(zorb => zorb.token.image.url)
-	const zoraEvents = eventsResponse.events.nodes
+	const zorbs = await getZorbs()
+	const zoraEvents = await getEvents(params.tokenId)
 	return {
 		props: { zorbs, zoraEvents }, // will be passed to the page component as props
 	}
 }
 
 export async function getStaticPaths() {
-	// const ways = posts.map(post => ({
-	// 	params: { id: post.id },
-	// }))
-
 	return {
 		paths: [],
 		fallback: 'blocking',
