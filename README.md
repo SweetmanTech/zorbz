@@ -1,11 +1,11 @@
-# Zorb Visualizer
+# Zorb Visualizer (zorbz)
 
-- Live Demo: https://zorbz.vercel.app/
-> Zora API Hackathon submission.
+-   Live Demo: https://zorbz.vercel.app/
+    > Zora API Hackathon submission.
 
 ### Demo
-![zorb-visualizer](https://user-images.githubusercontent.com/23249402/173201270-f417c092-74d4-4776-81d9-bb9469cd62f6.gif)
 
+![zorb-visualizer](https://user-images.githubusercontent.com/23249402/173201270-f417c092-74d4-4776-81d9-bb9469cd62f6.gif)
 
 ## Team
 

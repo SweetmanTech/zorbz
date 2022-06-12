@@ -1,1 +1,1 @@
-export const APP_NAME = 'Zorb Visualizer'
+export const APP_NAME = 'zorbz hackathon'
