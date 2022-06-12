@@ -1,8 +1,7 @@
 import axios from 'axios'
 
-const pinJSONToIPFS = (req, res) => {
-	console.log('REQUEST', req.body)
-	return axios
+const pinJSONToIPFS = (req, res) =>
+	axios
 		.post('https://api.pinata.cloud/pinning/pinJSONToIPFS', req.body, {
 			maxContentLength: 'Infinity',
 			headers: {
@@ -15,6 +14,5 @@ const pinJSONToIPFS = (req, res) => {
 			console.error(error)
 			return res.status(400).json({ error })
 		})
-}
 
 export default pinJSONToIPFS

@@ -4,10 +4,8 @@ import { addDays, format } from 'date-fns'
 const API_ENDPOINT = 'https://api.zora.co/graphql'
 const zdk = new ZDK({ endpoint: API_ENDPOINT })
 
-export const getFormattedDate = daysSinceGenesis => {
-	console.log('daysSinceGenesis', daysSinceGenesis)
-	return format(addDays(new Date(2022, 0, 0), daysSinceGenesis), 'yyyy-MM-dd')
-}
+export const getFormattedDate = daysSinceGenesis =>
+	format(addDays(new Date(2022, 0, 0), daysSinceGenesis), 'yyyy-MM-dd')
 
 const eventsArgs = tokenId => {
 	const startDate = getFormattedDate(tokenId)

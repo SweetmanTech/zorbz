@@ -11,9 +11,7 @@ const MintButton = ({ tokenId }) => {
 		signerOrProvider: signer,
 	})
 	const handleButtonClick = async () => {
-		console.log('MINT BUTTON TOKEN ID', tokenId)
 		const metadata = await pinJSONToIPFS(tokenId)
-		console.log('METADATA', metadata)
 		if (metadata.error) return
 
 		await contract
