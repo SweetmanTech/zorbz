@@ -15,9 +15,11 @@ const zorbArgs = {
 	includeFullDetails: false,
 }
 
+const getFormattedDate = daysSinceGenesis => format(addDays(new Date(2022, 0, 0), daysSinceGenesis), 'yyyy-MM-dd')
+
 const eventsArgs = tokenId => {
-	const startDate = format(addDays(new Date(2022, 0, 0), tokenId), 'yyyy-MM-dd')
-	const endDate = format(addDays(new Date(2022, 0, 1), tokenId), 'yyyy-MM-dd')
+	const startDate = getFormattedDate(tokenId)
+	const endDate = getFormattedDate(tokenId + 1)
 
 	return {
 		where: {},
