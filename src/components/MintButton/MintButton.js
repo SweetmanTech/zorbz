@@ -31,9 +31,7 @@ const MintButton = ({ tokenId }) => {
 				return receipt
 			})
 			.catch(err => {
-				console.error('FAILED')
 				console.error(err)
-				console.error(Object.keys(err))
 				toast.error(err.reason || err.message)
 				setPendingTx(false)
 				return { err }
