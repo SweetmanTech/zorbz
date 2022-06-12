@@ -2,6 +2,7 @@ import { APP_NAME } from '@/lib/consts'
 import { ShareIcon } from '@heroicons/react/outline'
 import dynamic from 'next/dynamic'
 import { getEvents, getZorbs } from '../utils/zoraApi'
+import ConnectWallet from '../components/ConnectWallet'
 
 const DynamicComponentWithNoSSR = dynamic(() => import('../components/Sketch'), { ssr: false })
 
@@ -11,6 +12,7 @@ const Home = ({ zorbs, zoraEvents }) => (
 			<div className="flex justify-center pt-8 sm:justify-start sm:pt-0">
 				<h1 className="text-6xl font-bold dark:text-white">{APP_NAME}</h1>
 			</div>
+			<ConnectWallet />
 			<div>
 				<DynamicComponentWithNoSSR zorbs={zorbs} zoraEvents={zoraEvents} />
 			</div>
