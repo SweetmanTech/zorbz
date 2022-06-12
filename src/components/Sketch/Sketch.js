@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import BaseSketch from 'react-p5'
 
 const windowWidth = 500
@@ -7,12 +7,7 @@ const NUMBER_OF_COLUMNS = 20
 const NUMBER_OF_ROWS = 25
 const Sketch = ({ zorbs, zora }) => {
 	const [t, setT] = useState(0)
-	const [zorb, setZorb] = useState()
 	const [zorbArray, setZorbArray] = useState([])
-
-	useEffect(() => {
-		console.log('ZORA', zora)
-	}, [])
 
 	const setup = (p5, canvasParentRef) => {
 		// use parent to render the canvas in this ref
@@ -30,7 +25,6 @@ const Sketch = ({ zorbs, zora }) => {
 		const mvx = 20
 		const mvy = 20
 		p5.background(0, w)
-		let numberOfZorbs = 0
 		for (let x = 0; x < NUMBER_OF_COLUMNS; x += 1)
 			for (let y = 0; y < NUMBER_OF_ROWS; y += 1) {
 				const n = _ => {
@@ -43,7 +37,6 @@ const Sketch = ({ zorbs, zora }) => {
 				nz = p5.noise(25 * x * fluid, 20 * y * fluid)
 				if ((x + 1) * (y + 1) - 1 < zora.length) {
 					p5.image(zorbArray[(x + 1) * (y + 1) - 1], ox, oy, r, r)
-					numberOfZorbs++
 				}
 			}
 	}
@@ -53,8 +46,6 @@ const Sketch = ({ zorbs, zora }) => {
 		for (let i = 0; i < NUMBER_OF_COLUMNS * NUMBER_OF_ROWS; i++) {
 			myImages.push(p5.loadImage(zorbs[i]))
 		}
-		const testZorb = p5.loadImage(zorbs[0])
-		setZorb(testZorb)
 		setZorbArray(myImages)
 	}
 	return <BaseSketch setup={setup} draw={draw} preload={preload} />
