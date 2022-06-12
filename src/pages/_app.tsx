@@ -5,7 +5,7 @@ import { chain, createClient, WagmiConfig } from 'wagmi'
 import { apiProvider, configureChains, darkTheme, getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit'
 
 const { chains, provider } = configureChains(
-	[chain.ropsten],
+	[chain.rinkeby],
 	[apiProvider.infura(process.env.NEXT_PUBLIC_INFURA_ID), apiProvider.fallback()]
 )
 
