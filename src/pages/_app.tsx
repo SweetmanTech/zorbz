@@ -3,6 +3,8 @@ import { APP_NAME } from '@/lib/consts'
 import '@rainbow-me/rainbowkit/styles.css'
 import { chain, createClient, WagmiConfig } from 'wagmi'
 import { apiProvider, configureChains, darkTheme, getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const { chains, provider } = configureChains(
 	[chain.rinkeby],
@@ -20,6 +22,7 @@ const App = ({ Component, pageProps }) => {
 				accentColorForeground: 'white',
 				fontStack: 'system',
 			})}>
+				<ToastContainer />
 				<Component {...pageProps} />
 			</RainbowKitProvider>
 		</WagmiConfig>
