@@ -5,9 +5,8 @@ const windowWidth = 500
 const windowHeight = 500
 const NUMBER_OF_COLUMNS = 20
 const NUMBER_OF_ROWS = 25
-const Sketch = ({ zorbs }) => {
+const Sketch = ({ zorbs, zoraEvents = { length: 500 } }) => {
 	const [t, setT] = useState(0)
-	const [zorb, setZorb] = useState()
 	const [zorbArray, setZorbArray] = useState([])
 
 	const setup = (p5, canvasParentRef) => {
@@ -36,7 +35,7 @@ const Sketch = ({ zorbs }) => {
 
 				let nz = 100
 				nz = p5.noise(25 * x * fluid, 20 * y * fluid)
-				if (zorb) {
+				if ((x + 1) * (y + 1) - 1 < zoraEvents.length) {
 					p5.image(zorbArray[(x + 1) * (y + 1) - 1], ox, oy, r, r)
 				}
 			}
@@ -47,8 +46,6 @@ const Sketch = ({ zorbs }) => {
 		for (let i = 0; i < NUMBER_OF_COLUMNS * NUMBER_OF_ROWS; i++) {
 			myImages.push(p5.loadImage(zorbs[i]))
 		}
-		const testZorb = p5.loadImage(zorbs[0])
-		setZorb(testZorb)
 		setZorbArray(myImages)
 	}
 	return <BaseSketch setup={setup} draw={draw} preload={preload} />
