@@ -5,7 +5,7 @@ const windowWidth = 500
 const windowHeight = 500
 const NUMBER_OF_COLUMNS = 20
 const NUMBER_OF_ROWS = 25
-const Sketch = ({ zorbs, zoraEvents }) => {
+const Sketch = ({ zorbs, zoraEvents = { length: 500 } }) => {
 	const [t, setT] = useState(0)
 	const [zorbArray, setZorbArray] = useState([])
 
