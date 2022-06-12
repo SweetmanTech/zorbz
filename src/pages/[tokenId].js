@@ -49,7 +49,12 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
 	return {
-		paths: [],
+		paths: [
+			{ params: { tokenId: '1' } },
+			{ params: { tokenId: '2' } },
+			{ params: { tokenId: '3' } },
+			{ params: { tokenId: '4' } },
+		],
 		fallback: 'blocking',
 	}
 }
