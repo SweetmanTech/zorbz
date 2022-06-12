@@ -1,5 +1,6 @@
 import { parseEther } from 'ethers/lib/utils'
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 import { useContract, useSigner } from 'wagmi'
 import { pinJSONToIPFS } from '../../utils/pinata'
 import TxModal from '../TxModal'
@@ -26,15 +27,18 @@ const MintButton = ({ tokenId }) => {
 				setPendingTx('minting your zorbz')
 				const receipt = await tx.wait()
 				setPendingTx(false)
+				toast.success('You minted your zorbz!')
 				return receipt
 			})
 			.catch(err => {
+				console.error('FAILED')
 				console.error(err)
+				console.error(Object.keys(err))
+				toast.error(err.reason || err.message)
 				setPendingTx(false)
 				return { err }
 			})
 	}
-	console.log('PENDING TX', pendingTx)
 
 	return (
 		<>
