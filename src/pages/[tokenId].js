@@ -36,7 +36,7 @@ const Home = ({ zorbs, zoraEvents }) => (
 
 export async function getStaticProps({ params }) {
 	const zorbs = await getZorbs()
-	const zoraEvents = await getEvents(params.tokenId)
+	const zoraEvents = await getEvents(parseInt(params.tokenId))
 	return {
 		props: { zorbs, zoraEvents }, // will be passed to the page component as props
 	}
