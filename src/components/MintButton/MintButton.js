@@ -9,20 +9,14 @@ const MintButton = ({ tokenId }) => {
 		contractInterface: abi,
 		signerOrProvider: signer,
 	})
-	console.log('CONTRACT', contract)
-	console.log('TOKEN ID', tokenId)
 	const handleButtonClick = async () => {
-		const receipt = await contract
+		await contract
 			.mint(tokenId, 'https://google.com', { value: parseEther('0.04').toString() })
-			.then(tx => {
-				console.log('TX', tx)
-				return tx.wait()
-			})
+			.then(tx => tx.wait())
 			.catch(err => {
 				console.error(err)
 				return { err }
 			})
-		console.log('RECEIPT', receipt)
 	}
 
 	return (
