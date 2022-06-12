@@ -14,16 +14,20 @@ const zorbArgs = {
 	includeFullDetails: false,
 }
 
-const eventsArgs = {
-	where: {},
-	filter: { timeFilter: { endDate: '2022-06-11', startDate: '2022-06-10' }, eventTypes: 'V2_AUCTION_EVENT' },
-	pagination: { limit: 500 },
-	includeFullDetails: false,
-	includeSalesHistory: false,
-	sort: { sortKey: 'CREATED', sortDirection: 'DESC' },
+const eventsArgs = (startDate, endDate) => {
+	console.log('startDate', startDate)
+	console.log('endDate', endDate)
+	return {
+		where: {},
+		filter: { timeFilter: { endDate, startDate }, eventTypes: 'V2_AUCTION_EVENT' },
+		pagination: { limit: 500 },
+		includeFullDetails: false,
+		includeSalesHistory: false,
+		sort: { sortKey: 'CREATED', sortDirection: 'DESC' },
+	}
 }
 
-const DynamicComponentWithNoSSR = dynamic(() => import('../components/Sketch'), { ssr: false })
+const DynamicComponentWithNoSSR = dynamic(() => import('../../components/Sketch'), { ssr: false })
 
 const Home = ({ zorbs, zora }) => (
 	<div className="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
@@ -54,14 +58,29 @@ const Home = ({ zorbs, zora }) => (
 	</div>
 )
 
-export async function getStaticProps(context) {
+export async function getStaticProps({ params }) {
+	console.log('PARAMS: params.startDate', params.startDate)
+	console.log('PARAMS: params.endDate', params.endDate)
+
 	const zorbResponse = await zdk.tokens(zorbArgs)
-	const zoraResponse = await zdk.events(eventsArgs)
+	const dailyEventArgs = eventsArgs(params.startDate, params.endDate)
+	const zoraResponse = await zdk.events(dailyEventArgs)
 	console.log('ZORA RESPONSE', zoraResponse)
 	const zorbs = zorbResponse.tokens.nodes.map(zorb => zorb.token.image.url)
 	const zora = zoraResponse.events.nodes
 	return {
 		props: { zorbs, zora }, // will be passed to the page component as props
+	}
+}
+
+export async function getStaticPaths() {
+	// const ways = posts.map(post => ({
+	// 	params: { id: post.id },
+	// }))
+
+	return {
+		paths: [],
+		fallback: 'blocking',
 	}
 }
 
