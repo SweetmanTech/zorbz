@@ -41,7 +41,7 @@ const Sketch = ({ zorbs, zora }) => {
 
 				let nz = 100
 				nz = p5.noise(25 * x * fluid, 20 * y * fluid)
-				if (numberOfZorbs < zora.length) {
+				if ((x + 1) * (y + 1) - 1 < zora.length) {
 					p5.image(zorbArray[(x + 1) * (y + 1) - 1], ox, oy, r, r)
 					numberOfZorbs++
 				}
