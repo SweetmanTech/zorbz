@@ -13,8 +13,6 @@ const OwnerSection = ({ tokenId }) => {
 	})
 	const { chains } = useNetwork()
 
-	console.log('owner', owner)
-	console.log('ENS', ens)
 	const contract = useContract({
 		addressOrName: '0x9598be1c138350d70322613c3d7899c8f0b2b432',
 		contractInterface: abi,
@@ -26,10 +24,6 @@ const OwnerSection = ({ tokenId }) => {
 			.ownerOf(tokenId)
 			.then(owner => setOwner(owner))
 			.catch(console.error)
-		console.log(
-			'etherscanBlockExplorers[chains[0].name.toLowerCase()]',
-			etherscanBlockExplorers[chains[0].name.toLowerCase()]
-		)
 	})
 
 	return (
