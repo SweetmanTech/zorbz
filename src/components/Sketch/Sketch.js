@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import BaseSketch from 'react-p5'
 
 const windowWidth = 500
@@ -6,11 +6,6 @@ const windowHeight = 500
 const Sketch = ({ zorbs, zoraEvents = { length: 500 } }) => {
 	const [t, setT] = useState(0)
 	const [zorbArray, setZorbArray] = useState([])
-
-	useEffect(() => {
-		console.log('NUMBER OF EVENT', zoraEvents.length)
-		console.log('proportion x:y', 20 / 25)
-	}, [])
 
 	const setup = (p5, canvasParentRef) => {
 		// use parent to render the canvas in this ref
