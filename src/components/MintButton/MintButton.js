@@ -2,7 +2,6 @@ import { parseEther } from 'ethers/lib/utils'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useContract, useSigner } from 'wagmi'
-import { pinJSONToIPFS } from '../../utils/pinata'
 import TxModal from '../TxModal'
 import abi from './abi.json'
 
@@ -10,17 +9,15 @@ const MintButton = ({ tokenId }) => {
 	const [pendingTx, setPendingTx] = useState(false)
 	const { data: signer } = useSigner()
 	const contract = useContract({
-		addressOrName: '0x59EA78ecc1210991354C7a52DDF518f07A9243b4',
+		addressOrName: '0x9598BE1c138350d70322613C3d7899c8F0b2B432',
 		contractInterface: abi,
 		signerOrProvider: signer,
 	})
 	const handleButtonClick = async () => {
 		setPendingTx('Please sign transaction')
-		const metadata = await pinJSONToIPFS(tokenId)
-		if (metadata.error) return
 
 		await contract
-			.mint(tokenId, `ipfs://${metadata}`, {
+			.mint(tokenId, {
 				value: parseEther('0.04').toString(),
 			})
 			.then(async tx => {
