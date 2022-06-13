@@ -10,7 +10,7 @@ const MintButton = ({ tokenId }) => {
 	const [pendingTx, setPendingTx] = useState(false)
 	const { data: signer } = useSigner()
 	const contract = useContract({
-		addressOrName: '0xCb3360dcbAf993D42d1eb008579464ce41203848',
+		addressOrName: '0x59EA78ecc1210991354C7a52DDF518f07A9243b4',
 		contractInterface: abi,
 		signerOrProvider: signer,
 	})
