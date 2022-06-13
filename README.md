@@ -2,6 +2,7 @@
 
 -   Live Demo: https://zorbz.vercel.app/
     > Zora API Hackathon submission.
+-   Smart Contracts: https://github.com/waynehoover/zorb-viz-contract
 
 ### Demo
 
