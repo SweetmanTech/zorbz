@@ -21,7 +21,6 @@ const MintButton = ({ tokenId, contract, onMint }) => {
 		}
 
 		const isOwner = await isZorbOwner(account.address)
-		console.log('IS OWNER', isOwner)
 
 		setPendingTx(`Please sign transaction ${isOwner ? '(zorb holder free mint)' : '(0.04 ETH to mint)'}`)
 

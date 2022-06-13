@@ -18,22 +18,6 @@ const OwnerSection = ({ tokenId }) => {
 			},
 		}
 	)
-	const zorbsRead = useContractRead(
-		{
-			addressOrName: '0xCa21d4228cDCc68D4e23807E5e370C07577Dd152',
-			contractInterface: abi,
-		},
-		'balanceOf',
-		{
-			args: '0xcfBf34d385EA2d5Eb947063b67eA226dcDA3DC38',
-			onSuccess(data) {
-				console.log('Success', data)
-			},
-			onError(err) {
-				console.log('ERROR', err)
-			},
-		}
-	)
 	const contract = useContract({
 		addressOrName: '0x9598be1c138350d70322613c3d7899c8f0b2b432',
 		contractInterface: abi,
