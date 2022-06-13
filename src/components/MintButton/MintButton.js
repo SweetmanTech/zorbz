@@ -15,8 +15,6 @@ const MintButton = ({ tokenId }) => {
 	})
 	const { activeChain, chains } = useNetwork()
 
-	console.log('CHAINS', chains[0])
-	console.log('activeChain?.id', activeChain?.id)
 	const handleButtonClick = async () => {
 		if (activeChain?.id !== chains[0].id) {
 			toast.error(`Wrong network: please connect to ${chains[0].name}`)
