@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
 const { chains, provider } = configureChains(
-	[chain.rinkeby],
+	[chain.mainnet],
 	[apiProvider.infura(process.env.NEXT_PUBLIC_INFURA_ID), apiProvider.fallback()]
 )
 
