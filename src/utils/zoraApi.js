@@ -1,11 +1,15 @@
 import { ZDK } from '@zoralabs/zdk'
-import { addDays, format } from 'date-fns'
+import { addDays, differenceInDays, format } from 'date-fns'
 
 const API_ENDPOINT = 'https://api.zora.co/graphql'
 const zdk = new ZDK({ endpoint: API_ENDPOINT })
 
 export const getFormattedDate = daysSinceGenesis =>
 	format(addDays(new Date(2022, 0, 0), daysSinceGenesis), 'yyyy-MM-dd')
+
+export const getTodayTokenId = () => differenceInDays(new Date(), new Date(2022, 0, 0)) - 2
+
+export const getRandomToken = () => Math.floor(Math.random() * (getTodayTokenId() - 0 + 1))
 
 const eventsArgs = tokenId => {
 	const startDate = getFormattedDate(tokenId)

@@ -3,6 +3,8 @@ import { ShareIcon } from '@heroicons/react/outline'
 import dynamic from 'next/dynamic'
 import { ZDK } from '@zoralabs/zdk'
 import Head from 'next/head'
+import { getRandomToken, getTodayTokenId } from '../utils/zoraApi'
+import Link from 'next/link'
 
 const API_ENDPOINT = 'https://api.zora.co/graphql'
 const zdk = new ZDK({ endpoint: API_ENDPOINT })
@@ -18,7 +20,7 @@ const args = {
 
 const DynamicComponentWithNoSSR = dynamic(() => import('../components/Sketch'), { ssr: false })
 
-const Home = ({ zorbs }) => (
+const Home = ({ zorbs, today }) => (
 	<div className="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
 		<Head>
 			<title>zorbz</title>
@@ -56,6 +58,18 @@ const Home = ({ zorbs }) => (
 			</div>
 
 			<div className="flex justify-center mt-4 sm:items-center sm:justify-between">
+				<Link href={`/${today}`}>
+					<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+						View today&apos;s NFT {today}
+					</button>
+				</Link>
+
+				<Link href={`/${getRandomToken()}`}>
+					<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+						Random
+					</button>
+				</Link>
+
 				<div className="text-center text-sm text-gray-500 sm:text-left">
 					<div className="flex items-center">
 						<ShareIcon className="-mt-px w-5 h-5 text-gray-400" />
@@ -77,9 +91,9 @@ const Home = ({ zorbs }) => (
 export async function getStaticProps(context) {
 	const response = await zdk.tokens(args)
 	let zorbs = response.tokens.nodes.map(zorb => zorb.token.image.url)
-
+	const today = getTodayTokenId()
 	return {
-		props: { zorbs }, // will be passed to the page component as props
+		props: { zorbs, today }, // will be passed to the page component as props
 	}
 }
 
