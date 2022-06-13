@@ -3,7 +3,7 @@
 -   Live Demo: https://zorbz.vercel.app/
     > Zora API Hackathon submission.
 -   Smart Contracts: https://github.com/waynehoover/zorb-viz-contract
--   Ethereum Mainnet: `[0x2079c2765462Af6D78A9cCbDDb6Ff3C6D4Ba2e24](https://etherscan.io/address/0x2079c2765462Af6D78A9cCbDDb6Ff3C6D4Ba2e24)`
+-   Ethereum Mainnet: [0x2079c2765462Af6D78A9cCbDDb6Ff3C6D4Ba2e24](https://etherscan.io/address/0x2079c2765462Af6D78A9cCbDDb6Ff3C6D4Ba2e24)
 
 ### Demo
 
