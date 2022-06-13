@@ -16,6 +16,10 @@ const MintButton = ({ tokenId }) => {
 	const { activeChain, chains } = useNetwork()
 
 	const handleButtonClick = async () => {
+		if (!activeChain) {
+			toast.error(`Please connect your wallet`)
+			return setPendingTx(false)
+		}
 		if (activeChain?.id !== chains[0].id) {
 			toast.error(`Wrong network: please connect to ${chains[0].name}`)
 			return setPendingTx(false)
