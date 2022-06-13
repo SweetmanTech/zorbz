@@ -13,7 +13,7 @@ const MintButton = ({ tokenId }) => {
 		contractInterface: abi,
 		signerOrProvider: signer,
 	})
-	const { activeChain, chains, error, isLoading, pendingChainId, switchNetwork } = useNetwork()
+	const { activeChain, chains } = useNetwork()
 
 	console.log('CHAINS', chains[0])
 	console.log('activeChain?.id', activeChain?.id)
