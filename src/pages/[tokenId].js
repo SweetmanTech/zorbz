@@ -41,7 +41,8 @@ const Home = ({ zorbs, zoraEvents, tokenId, time }) => (
 			<div className="pt-8 sm:justify-start sm:pt-0">
 				<h1 className="text-6xl font-bold dark:text-white">{APP_NAME}</h1>
 				<h3 className="font-bold dark:text-white">Zora Market Events for Date: {time}</h3>
-				<h3 className="font-bold dark:text-white">Events: {zoraEvents.length}</h3>
+				<h3 className="font-bold dark:text-white">Events: {zoraEvents.length} </h3>
+				<h3 className="font-bold dark:text-white">1 zorb = 1 event</h3>
 			</div>
 			<ConnectWallet />
 			<div>
