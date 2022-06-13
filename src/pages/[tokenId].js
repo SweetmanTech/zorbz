@@ -1,14 +1,14 @@
 import { APP_NAME } from '@/lib/consts'
 import { ShareIcon } from '@heroicons/react/outline'
 import dynamic from 'next/dynamic'
-import { getEvents, getZorbs } from '../utils/zoraApi'
+import { getEvents, getFormattedDate, getZorbs } from '../utils/zoraApi'
 import ConnectWallet from '../components/ConnectWallet'
 import Head from 'next/head'
 import OwnerSection from '../components/OwnerSection'
 
 const DynamicComponentWithNoSSR = dynamic(() => import('../components/Sketch'), { ssr: false })
 
-const Home = ({ zorbs, zoraEvents, tokenId }) => (
+const Home = ({ zorbs, zoraEvents, tokenId, time }) => (
 	<div className="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
 		<Head>
 			<title>zorbz #{tokenId}</title>
@@ -38,8 +38,10 @@ const Home = ({ zorbs, zoraEvents, tokenId }) => (
 			/>
 		</Head>
 		<div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
-			<div className="flex justify-center pt-8 sm:justify-start sm:pt-0">
+			<div className="pt-8 sm:justify-start sm:pt-0">
 				<h1 className="text-6xl font-bold dark:text-white">{APP_NAME}</h1>
+				<h3 className="font-bold dark:text-white">Zora Market Events for Date: {time}</h3>
+				<h3 className="font-bold dark:text-white">Events: {zoraEvents.length}</h3>
 			</div>
 			<ConnectWallet />
 			<div>
@@ -70,8 +72,9 @@ export async function getStaticProps({ params }) {
 	const { tokenId } = params
 	const zorbs = await getZorbs()
 	const zoraEvents = await getEvents(parseInt(tokenId))
+	const time = getFormattedDate(tokenId)
 	return {
-		props: { zorbs, zoraEvents, tokenId }, // will be passed to the page component as props
+		props: { zorbs, zoraEvents, tokenId, time }, // will be passed to the page component as props
 	}
 }
 
