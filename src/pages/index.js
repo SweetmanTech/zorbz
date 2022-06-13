@@ -60,7 +60,7 @@ const Home = ({ zorbs, today }) => (
 			<div className="flex justify-center mt-4 sm:items-center sm:justify-between">
 				<Link href={`/${today}`}>
 					<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-						View today&apos;s NFT {today}
+						View today&apos;s NFT #{today}
 					</button>
 				</Link>
 
