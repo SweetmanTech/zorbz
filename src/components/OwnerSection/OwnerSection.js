@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { useContract, useEnsName, useSigner } from 'wagmi'
+import { etherscanBlockExplorers, useContract, useEnsName, useNetwork, useSigner } from 'wagmi'
+import truncate from '../../utils/truncate'
 import MintButton from '../MintButton'
 import abi from './abi.json'
 
@@ -10,6 +11,8 @@ const OwnerSection = ({ tokenId }) => {
 		address: owner,
 		staleTime: 2_000,
 	})
+	const { chains } = useNetwork()
+
 	console.log('owner', owner)
 	console.log('ENS', ens)
 	const contract = useContract({
@@ -23,13 +26,24 @@ const OwnerSection = ({ tokenId }) => {
 			.ownerOf(tokenId)
 			.then(owner => setOwner(owner))
 			.catch(console.error)
+		console.log(
+			'etherscanBlockExplorers[chains[0].name.toLowerCase()]',
+			etherscanBlockExplorers[chains[0].name.toLowerCase()]
+		)
 	})
 
 	return (
 		<>
 			{owner ? (
 				<div className="flex justify-center pt-8 sm:justify-start sm:pt-0">
-					<h3 className="font-bold dark:text-white">Owned by: {owner}</h3>
+					<a
+						target="__blank"
+						href={`${etherscanBlockExplorers[chains[0].name.toLowerCase()].url}/token/${
+							contract.address
+						}?a=${tokenId}`}
+					>
+						<h3 className="font-bold dark:text-white">Owned by: {truncate(owner)}</h3>
+					</a>
 				</div>
 			) : (
 				<MintButton tokenId={tokenId} contract={contract} />
