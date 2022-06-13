@@ -13,7 +13,7 @@
 
 -   Team Lead/Generative Artist: [valcoholics.eth](https://twitter.com/valcoholics1)
 -   Engineer: [wayneh.eth](https://twitter.com/@waynehoover_)
--   Engineer: [sweetman.eth](https://github.com/SweetmanTech)
+-   Engineer: [sweetman.eth](https://twitter.com/@sweetman_eth)
 -   Designer: [novumrembey⭐✌🏿.eth](https://github.com/rayadamas/)
 
 ## Getting Started
