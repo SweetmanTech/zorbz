@@ -1,5 +1,6 @@
 import { ZDK } from '@zoralabs/zdk'
 import { addDays, format } from 'date-fns'
+import { getContractAddress } from 'ethers/lib/utils'
 
 const API_ENDPOINT = 'https://api.zora.co/graphql'
 const zdk = new ZDK({ endpoint: API_ENDPOINT })

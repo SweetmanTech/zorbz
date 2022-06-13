@@ -3,8 +3,8 @@ import { ShareIcon } from '@heroicons/react/outline'
 import dynamic from 'next/dynamic'
 import { getEvents, getZorbs } from '../utils/zoraApi'
 import ConnectWallet from '../components/ConnectWallet'
-import MintButton from '../components/MintButton/MintButton'
 import Head from 'next/head'
+import OwnerSection from '../components/OwnerSection'
 
 const DynamicComponentWithNoSSR = dynamic(() => import('../components/Sketch'), { ssr: false })
 
@@ -47,7 +47,7 @@ const Home = ({ zorbs, zoraEvents, tokenId }) => (
 			</div>
 
 			<div className="flex justify-center mt-4 sm:items-center sm:justify-between">
-				<MintButton tokenId={tokenId} />
+				<OwnerSection tokenId={tokenId} />
 				<div className="text-center text-sm text-gray-500 sm:text-left">
 					<div className="flex items-center">
 						<ShareIcon className="-mt-px w-5 h-5 text-gray-400" />
