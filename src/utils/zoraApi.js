@@ -40,3 +40,15 @@ export const getEvents = async daysSinceGenesis => {
 	const eventsResponse = await zdk.events(dailyEventArgs)
 	return eventsResponse.events.nodes
 }
+
+export const isZorbOwner = async address => {
+	const zorbArgs = {
+		where: {
+			collectionAddresses: ['0xCa21d4228cDCc68D4e23807E5e370C07577Dd152'],
+			ownerAddresses: [address],
+		},
+		includeFullDetails: false,
+	}
+	const zorbOwnerResponse = await zdk.tokens(zorbArgs)
+	return zorbOwnerResponse.tokens.nodes.length > 0
+}
