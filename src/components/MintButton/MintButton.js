@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 import { useNetwork } from 'wagmi'
 import TxModal from '../TxModal'
 
-const MintButton = ({ tokenId, contract }) => {
+const MintButton = ({ tokenId, contract, onMint }) => {
 	const [pendingTx, setPendingTx] = useState(false)
 	const { activeChain, chains } = useNetwork()
 
@@ -28,6 +28,7 @@ const MintButton = ({ tokenId, contract }) => {
 				const receipt = await tx.wait()
 				setPendingTx(false)
 				toast.success('You minted your zorbz!')
+				onMint()
 				return receipt
 			})
 			.catch(err => {

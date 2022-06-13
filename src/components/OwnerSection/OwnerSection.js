@@ -5,7 +5,7 @@ import abi from './abi.json'
 
 const OwnerSection = ({ tokenId }) => {
 	const { data: signer } = useSigner()
-	const { data: owner } = useContractRead(
+	const { data: owner, refetch } = useContractRead(
 		{
 			addressOrName: '0x9598be1c138350d70322613c3d7899c8f0b2b432',
 			contractInterface: abi,
@@ -13,9 +13,11 @@ const OwnerSection = ({ tokenId }) => {
 		'ownerOf',
 		{
 			args: tokenId,
+			onError(error) {
+				console.error('Error', error)
+			},
 		}
 	)
-
 	const contract = useContract({
 		addressOrName: '0x9598be1c138350d70322613c3d7899c8f0b2b432',
 		contractInterface: abi,
@@ -34,7 +36,7 @@ const OwnerSection = ({ tokenId }) => {
 					</a>
 				</div>
 			) : (
-				<MintButton tokenId={tokenId} contract={contract} />
+				<MintButton tokenId={tokenId} contract={contract} onMint={refetch} />
 			)}
 		</>
 	)
