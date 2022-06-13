@@ -3,6 +3,7 @@
 -   Live Demo: https://zorbz.vercel.app/
     > Zora API Hackathon submission.
 -   Smart Contracts: https://github.com/waynehoover/zorb-viz-contract
+-   Ethereum Mainnet: [0x2079c2765462Af6D78A9cCbDDb6Ff3C6D4Ba2e24](https://etherscan.io/address/0x2079c2765462Af6D78A9cCbDDb6Ff3C6D4Ba2e24)
 
 ### Demo
 
@@ -12,7 +13,7 @@
 
 -   Team Lead/Generative Artist: [valcoholics.eth](https://twitter.com/valcoholics1)
 -   Engineer: [wayneh.eth](https://twitter.com/@waynehoover_)
--   Engineer: [sweetman.eth](https://github.com/SweetmanTech)
+-   Engineer: [sweetman.eth](https://twitter.com/@sweetman_eth)
 -   Designer: [novumrembey⭐✌🏿.eth](https://github.com/rayadamas/)
 
 ## Getting Started
