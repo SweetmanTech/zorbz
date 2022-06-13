@@ -24,7 +24,7 @@ const Sketch = ({ zorbs, zoraEvents = { length: 500 } }) => {
 		const mvy = 10
 		p5.background(0, w)
 		const NUMBER_OF_ROWS = Math.floor(Math.sqrt((5 * zoraEvents.length) / 4))
-		const NUMBER_OF_COLUMNS = Math.ceil(zoraEvents.length / NUMBER_OF_ROWS) // 20
+		const NUMBER_OF_COLUMNS = Math.ceil(zoraEvents.length / NUMBER_OF_ROWS)
 
 		for (let x = 0; x < NUMBER_OF_COLUMNS; x += 1)
 			for (let y = 0; y < NUMBER_OF_ROWS; y += 1) {
