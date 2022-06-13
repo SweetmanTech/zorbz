@@ -14,14 +14,14 @@ const Sketch = ({ zorbs, zoraEvents = { length: 500 } }) => {
 	}
 
 	const draw = p5 => {
-		const steps = 0.005
+		const steps = 0.002 //speed
 		setT((t += steps))
-		const fluid = 0.01
-		const zorbRadius = 24
-		const w = 250
-		const h = 250
-		const mvx = 20
-		const mvy = 20
+		const fluid = 0.009
+		const zorbRadius = 24 //size of balls
+		const w = 500
+		const h = 500
+		const mvx = 50
+		const mvy = 10
 		p5.background(0, w)
 		const NUMBER_OF_ROWS = Math.floor(Math.sqrt((5 * zoraEvents.length) / 4))
 		const NUMBER_OF_COLUMNS = Math.ceil(zoraEvents.length / NUMBER_OF_ROWS)
@@ -35,7 +35,7 @@ const Sketch = ({ zorbs, zoraEvents = { length: 500 } }) => {
 				const yCoordinate = (windowHeight / NUMBER_OF_ROWS) * y + mvy * p5.cos(n())
 
 				let nz = 100
-				nz = p5.noise(25 * x * fluid, 20 * y * fluid)
+				nz = p5.noise(15 * x * fluid, 20 * y * fluid)
 				const zorbIndex = (x + 1) * (y + 1) - 1
 				if (zorbIndex < zoraEvents.length) {
 					p5.image(zorbArray[zorbIndex], xCoordinate, yCoordinate, zorbRadius, zorbRadius)

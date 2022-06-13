@@ -1,18 +1,11 @@
 import { parseEther } from 'ethers/lib/utils'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
-import { useContract, useNetwork, useSigner } from 'wagmi'
+import { useNetwork } from 'wagmi'
 import TxModal from '../TxModal'
-import abi from './abi.json'
 
-const MintButton = ({ tokenId }) => {
+const MintButton = ({ tokenId, contract, onMint }) => {
 	const [pendingTx, setPendingTx] = useState(false)
-	const { data: signer } = useSigner()
-	const contract = useContract({
-		addressOrName: '0x9598BE1c138350d70322613C3d7899c8F0b2B432',
-		contractInterface: abi,
-		signerOrProvider: signer,
-	})
 	const { activeChain, chains } = useNetwork()
 
 	const handleButtonClick = async () => {
@@ -35,6 +28,7 @@ const MintButton = ({ tokenId }) => {
 				const receipt = await tx.wait()
 				setPendingTx(false)
 				toast.success('You minted your zorbz!')
+				onMint()
 				return receipt
 			})
 			.catch(err => {
