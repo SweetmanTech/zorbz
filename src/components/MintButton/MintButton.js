@@ -1,7 +1,7 @@
 import { parseEther } from 'ethers/lib/utils'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
-import { useContract, useSigner } from 'wagmi'
+import { useContract, useNetwork, useSigner } from 'wagmi'
 import TxModal from '../TxModal'
 import abi from './abi.json'
 
@@ -13,7 +13,17 @@ const MintButton = ({ tokenId }) => {
 		contractInterface: abi,
 		signerOrProvider: signer,
 	})
+	const { activeChain, chains } = useNetwork()
+
 	const handleButtonClick = async () => {
+		if (!activeChain) {
+			toast.error(`Please connect your wallet`)
+			return setPendingTx(false)
+		}
+		if (activeChain?.id !== chains[0].id) {
+			toast.error(`Wrong network: please connect to ${chains[0].name}`)
+			return setPendingTx(false)
+		}
 		setPendingTx('Please sign transaction')
 
 		await contract
