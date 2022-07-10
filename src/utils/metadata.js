@@ -15,7 +15,7 @@ const metadata = tokenId => {
 		license: 'cc0',
 		locationCreated: 'Zora API Hackathon',
 		external_url: `https://zorbz.vercel.app/${tokenId}`,
-		animation_url: 'ipfs://QmQTCVZk7nJHk6HjjiBTvXBGLivFiPwjb47aZfvxwZTVxc',
+		animation_url: 'ipfs://QmedC1ufEG9L1erNzrUmUwtNHAStwpbJ7FY5TEA8EcgM6k',
 		project: {
 			title: 'zorbz #1',
 			artwork: {
